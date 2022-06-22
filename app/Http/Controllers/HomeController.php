@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Pow;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -46,10 +48,14 @@ class HomeController extends Controller
             'title' => $request->title,
             'content' => $request->content
         ]);
-
-
-
-
         // return view('create_post');
+    }
+
+    public function delete($id)
+    {
+        Post::where('id', $id)
+            ->delete();
+
+        return Redirect::route('app_home');
     }
 }
