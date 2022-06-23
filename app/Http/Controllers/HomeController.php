@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Rules\UpperCase;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\Redirect;
@@ -43,6 +44,11 @@ class HomeController extends Controller
         $post->content = $request->content;
         $post->save();
         */
+
+        $request->validate([
+            'title' => ['required', 'min:5', 'max:255', 'unique:posts', new UpperCase],
+            'content' => 'required'
+        ]);
 
         Post::create([
             'title' => $request->title,

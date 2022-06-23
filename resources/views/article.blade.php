@@ -3,6 +3,7 @@
 @section('content')
     <h2>{{$post->title}} </h2>
     <h5>{{$post->content}} </h5
+        <span> {{$post->image->path}}</span>
     
        <div>
              <a class="btn btn-light" href="">Editer</a>
